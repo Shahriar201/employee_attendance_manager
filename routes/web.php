@@ -21,4 +21,11 @@ Route::get('/', [App\Http\Controllers\FrontendController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('auth/google', [App\Http\Controllers\GoogleAuthController::class, 'redirectToGoogle'])->name('login.google.auth');
+Route::get('auth/google/call-back', [App\Http\Controllers\GoogleAuthController::class, 'callbackGoogle']);
+
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth']);

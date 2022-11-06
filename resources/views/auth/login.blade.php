@@ -55,9 +55,10 @@
 
                         <div class="row mb-0 mt-3">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-dark">
+                                <a href="{{ route('login.google.auth') }}" class="btn btn-dark">Login with Google</a>
+                                {{-- <button type="submit" class="btn btn-dark">
                                     {{ __('Login with Google') }}
-                                </button>
+                                </button> --}}
 
                                 {{-- @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
