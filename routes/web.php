@@ -27,3 +27,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('auth/google', [App\Http\Controllers\GoogleAuthController::class, 'redirectToGoogle'])->name('login.google.auth');
 Route::get('auth/google/call-back', [App\Http\Controllers\GoogleAuthController::class, 'callbackGoogle']);
 
+Route::group(['middleware'=>'auth'], function() {
+
+    Route::prefix('employees')->group(function(){
+        Route::get('/view', [App\Http\Controllers\Backend\EmployeeController::class, 'view'])->name('employees.view');
+        Route::get('/add', 'Backend\UserController@add')->name('employees.add');
+        Route::post('/store', 'Backend\UserController@store')->name('employees.store');
+        Route::get('/edit/{id}', 'Backend\UserController@edit')->name('employees.edit');
+        Route::post('/update/{id}', 'Backend\UserController@update')->name('employees.update');
+        Route::post('/delete', 'Backend\UserController@delete')->name('employees.delete');
+    });
+});
+

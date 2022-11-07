@@ -14,7 +14,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{{ url('/') }}" class="nav-link">
+            <a href="{{ url('/home') }}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -22,45 +22,31 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('employees.view') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Customers
+                Employee
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Category
-              </p>
+          {{-- <li class="nav-item has-treeview {{ ($prefix=='/employees')?'menu-open':'' }}">
+            <a href="" class="nav-link">
+                <i class="nav-icon fa fa-user"></i>
+                <p>
+                    Manage User
+                    <i class="fas fa-angle-left right"></i>
+                </p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Product
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Product WIth DB Query
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                File Upload
-              </p>
-            </a>
-          </li>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('users.view') }}" class="nav-link {{ ($route=='users.view')?'active':'' }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>View User</p>
+                    </a>
+                </li>
+
+            </ul>
+        </li> --}}
         </ul>
       </nav>
     </div>
