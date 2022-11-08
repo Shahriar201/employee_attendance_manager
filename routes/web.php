@@ -29,6 +29,16 @@ Route::get('auth/google/call-back', [App\Http\Controllers\GoogleAuthController::
 
 Route::group(['middleware'=>'auth'], function() {
 
+    Route::prefix('manages')->group(function() {
+        //Permission routes
+        Route::get('/permission-view', [App\Http\Controllers\PermissionController::class, 'viewPermission'])->name('permissions.view');
+        Route::get('/permission-add', [App\Http\Controllers\PermissionController::class, 'addPermission'])->name('permissions.add');
+        Route::post('/permission-store', [App\Http\Controllers\PermissionController::class, 'storePermission'])->name('permissions.store');
+        Route::get('/permission-edit/{id}', [App\Http\Controllers\PermissionController::class, 'editPermission'])->name('permissions.edit');
+        Route::post('/permission-update/{id}', [App\Http\Controllers\PermissionController::class, 'updatePermission'])->name('permissions.update');
+        Route::post('/permission-delete', [App\Http\Controllers\PermissionController::class, 'deletePermission'])->name('permissions.delete');
+    });
+
     Route::prefix('employees')->group(function(){
         Route::get('/view', [App\Http\Controllers\Backend\EmployeeController::class, 'view'])->name('employees.view');
         Route::get('/add', [App\Http\Controllers\Backend\EmployeeController::class, 'add'])->name('employees.add');

@@ -29,7 +29,8 @@
 
   <!-- jQuery -->
   <script src="{{ asset('public/backend/assets') }}/plugins/jquery/jquery.min.js"></script>
-  <script src="{{ asset('public/backend/assets/plugins/notify-js/notify.min.js') }}"></script>
+  {{-- <script src="{{ asset('public/backend/assets/plugins/notify-js/notify.min.js') }}"></script> --}}
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="{{ asset('public/backend/assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('public/backend/assets/plugins/sweetalert2/sweetalert2.css') }}">
@@ -217,6 +218,8 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{{ asset('public/backend/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('public/backend/assets') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
@@ -243,6 +246,10 @@
 <script src="{{ asset('public/backend/assets') }}/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('public/backend/assets') }}/dist/js/pages/dashboard.js"></script>
+
+<!-- jquery-validation -->
+<script src="{{ asset('public/backend/assets/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('public/backend/assets/plugins/jquery-validation/additional-methods.min.js') }}"></script>
 
 @stack('js')
 
