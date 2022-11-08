@@ -53,7 +53,7 @@ Route::group(['middleware'=>'auth'], function() {
         Route::post('/store', [App\Http\Controllers\Backend\EmployeeController::class, 'storeEmployee'])->name('employees.store');
         Route::get('/edit/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'editEmployee'])->name('employees.edit');
         Route::post('/update/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'updateEmployee'])->name('employees.update');
-        Route::get('/delete', [App\Http\Controllers\Backend\EmployeeController::class, 'deleteEmployee'])->name('employees.delete');
+        Route::post('/delete', [App\Http\Controllers\Backend\EmployeeController::class, 'deleteEmployee'])->name('employees.delete');
     });
 });
 

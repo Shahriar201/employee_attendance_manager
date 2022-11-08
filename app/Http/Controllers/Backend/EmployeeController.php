@@ -67,4 +67,14 @@ class EmployeeController extends Controller
         return redirect()->route('employees.view')->with('success', 'Data updated successfully');
 
     }
+
+    public function deleteEmployee(Request $request){
+
+        $employee = User::find($request->id);
+        $employee->delete();
+
+        $employee->syncRoles([]);
+
+        return redirect()->back()->with('success', 'Data deleted successfully');
+    }
 }
