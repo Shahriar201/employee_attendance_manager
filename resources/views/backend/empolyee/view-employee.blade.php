@@ -60,7 +60,12 @@
 
                                         <tr class="{{ $employee->id }}">
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ $employee->user_type }}</td>
+                                            <td>
+                                                @if (!empty($employee->getRoleNames()))
+                                                @foreach ($employee->getRoleNames() as $role)
+                                                    {{ $role }}
+                                                @endforeach
+                                            @endif</td>
                                             <td>{{ $employee->name }}</td>
                                             <td>{{ $employee->email }}</td>
                                             <td>

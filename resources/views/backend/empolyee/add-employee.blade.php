@@ -52,11 +52,12 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="user_type">User Role</label>
-                                        <select name="user_type" id="user_type" class="form-control">
-                                            <option value="">Select Role</option>
-                                            <option value="Admin">Admin</option>
-                                            <option value="Employee">Employee</option>
-                                        </select>
+                                    <select name="role" id="role" class="form-control">
+                                        <option value="">Select Role</option>
+                                        @foreach ($roles as $role)
+                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
                                </div>
 
                                 <div class="form-group col-md-4">
