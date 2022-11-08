@@ -39,13 +39,13 @@ Route::group(['middleware'=>'auth'], function() {
         Route::post('/permission-delete', [App\Http\Controllers\PermissionController::class, 'deletePermission'])->name('permissions.delete');
     });
 
-    Route::prefix('employees')->group(function(){
-        Route::get('/view', [App\Http\Controllers\Backend\EmployeeController::class, 'view'])->name('employees.view');
-        Route::get('/add', [App\Http\Controllers\Backend\EmployeeController::class, 'add'])->name('employees.add');
-        Route::post('/store', [App\Http\Controllers\Backend\EmployeeController::class, 'store'])->name('employees.store');
-        Route::get('/edit/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'edit'])->name('employees.edit');
-        Route::post('/update/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'update'])->name('employees.update');
-        Route::post('/delete', [App\Http\Controllers\Backend\EmployeeController::class, 'delete'])->name('employees.delete');
-    });
+    // Route::prefix('employees')->group(function(){
+    //     Route::get('/view', [App\Http\Controllers\Backend\EmployeeController::class, 'view'])->name('employees.view');
+    //     Route::get('/add', [App\Http\Controllers\Backend\EmployeeController::class, 'add'])->name('employees.add');
+    //     Route::post('/store', [App\Http\Controllers\Backend\EmployeeController::class, 'store'])->name('employees.store');
+    //     Route::get('/edit/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'edit'])->name('employees.edit');
+    //     Route::post('/update/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'update'])->name('employees.update');
+    //     Route::get('/delete', [App\Http\Controllers\Backend\EmployeeController::class, 'delete'])->name('employees.delete');
+    // });
 });
 

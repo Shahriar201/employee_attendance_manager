@@ -29,16 +29,17 @@
 
   <!-- jQuery -->
   <script src="{{ asset('public/backend/assets') }}/plugins/jquery/jquery.min.js"></script>
-  {{-- <script src="{{ asset('public/backend/assets/plugins/notify-js/notify.min.js') }}"></script> --}}
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="{{ asset('public/backend/assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('public/backend/assets/plugins/sweetalert2/sweetalert2.css') }}">
+
+  <script src="{{ asset('public/backend/assets/plugins/notify-js/notify.min.js') }}"></script>
+
   <!-- jQuery UI 1.11.4 -->
   <script src="{{ asset('public/backend/assets') }}/plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script src="{{ asset('public/backend/assets/plugins/toastr/toastr.min.js') }}"></script>
   <script src="{{ asset('public/backend/assets/plugins/toastr/toastr.min.css') }}"></script>
+  <!-- Sweet Alert -->
+  <script src="{{ asset('public/backend') }}/sweetalert/sweetalert.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="{{ asset('public/backend') }}/sweetalert/sweetalert.css" type="text/css">
   @stack('css')
 
 </head>
@@ -164,34 +165,6 @@
 
   @endif
 
-  <script type="text/javascript">
-        $(function() {
-            $(document).on('click', '#delete', function(e) {
-                e.preventDefault();
-                var link = $(this).attr("href");
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "Delete this data",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = link;
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        )
-                    }
-                })
-            });
-        });
-
-  </script>
-
   {{-- Realtime image using Javascript --}}
   <script type="text/javascript">
     $(document).ready(function() {
@@ -219,7 +192,7 @@
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- jQuery UI 1.11.4 -->
-<script src="{{ asset('public/backend/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('public/backend/assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('public/backend/assets') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
@@ -252,6 +225,54 @@
 <script src="{{ asset('public/backend/assets/plugins/jquery-validation/additional-methods.min.js') }}"></script>
 
 @stack('js')
+
+{{-- Delete using sweet alert by post method --}}
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $(document).on('click', '#delete', function() {
+            var actionTo = $(this).attr('href');
+            var token = $(this).attr('data-token');
+            var id = $(this).attr('data-id');
+            swal({
+                    title: "Are you sure?",
+                    type: "success",
+                    showCancelButton: true,
+                    confirmButtonClass: 'btn-danger',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: "No",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        $.ajax({
+                            url: actionTo,
+                            type: 'post',
+                            data: {
+                                id: id,
+                                _token: token
+                            },
+                            success: function(data) {
+                                swal({
+                                        title: "Deleted!",
+                                        type: "success"
+                                    },
+                                    function(isConfirm) {
+                                        if (isConfirm) {
+                                            $('.' + id).fadeOut();
+                                        }
+                                    });
+                            }
+                        });
+                    } else {
+                        swal("Cancelled", "", "error");
+                    }
+                });
+            return false;
+        })
+    })
+
+  </script>
 
 </body>
 </html>
