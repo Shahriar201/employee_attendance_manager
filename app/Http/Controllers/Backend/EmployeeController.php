@@ -12,6 +12,6 @@ class EmployeeController extends Controller
 
         $employees = User::all();
 
-        return view('backend.empolyee.view-employee', $employees);
+        return view('backend.empolyee.view-employee', compact('employees'));
     }
 }
