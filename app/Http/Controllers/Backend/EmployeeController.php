@@ -41,4 +41,11 @@ class EmployeeController extends Controller
 
         return redirect()->route('employees.view')->with('success', 'Data inserted successfully');
     }
+
+    public function editEmployee($id){
+        $editData = User::find($id);
+        $roles = Role::all();
+
+        return view('backend.empolyee.edit-employee', compact('editData', 'roles'));
+    }
 }
