@@ -25,6 +25,9 @@
   <link rel="stylesheet" href="{{ asset('public/backend/assets') }}/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('public/backend/assets') }}/plugins/summernote/summernote-bs4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('public/backend/assets') }}/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="{{ asset('public/backend/assets') }}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   @yield('css')
 
   <!-- jQuery -->
@@ -223,6 +226,8 @@
 <!-- jquery-validation -->
 <script src="{{ asset('public/backend/assets/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('public/backend/assets/plugins/jquery-validation/additional-methods.min.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('public/backend/assets') }}/plugins/select2/js/select2.full.min.js"></script>
 
 @stack('js')
 
@@ -273,6 +278,13 @@
     })
 
   </script>
+
+  {{-- Select2 JS--}}
+  <script type="text/javascript">
+    $(function () {
+        $('.select2').select2();
+    })
+</script>
 
 </body>
 </html>

@@ -30,13 +30,21 @@ Route::get('auth/google/call-back', [App\Http\Controllers\GoogleAuthController::
 Route::group(['middleware'=>'auth'], function() {
 
     Route::prefix('manages')->group(function() {
-        //Permission routes
+        // Permission routes
         Route::get('/permission-view', [App\Http\Controllers\PermissionController::class, 'viewPermission'])->name('permissions.view');
         Route::get('/permission-add', [App\Http\Controllers\PermissionController::class, 'addPermission'])->name('permissions.add');
         Route::post('/permission-store', [App\Http\Controllers\PermissionController::class, 'storePermission'])->name('permissions.store');
         Route::get('/permission-edit/{id}', [App\Http\Controllers\PermissionController::class, 'editPermission'])->name('permissions.edit');
         Route::post('/permission-update/{id}', [App\Http\Controllers\PermissionController::class, 'updatePermission'])->name('permissions.update');
         Route::post('/permission-delete', [App\Http\Controllers\PermissionController::class, 'deletePermission'])->name('permissions.delete');
+
+        // Role routes
+        Route::get('/role-view', [App\Http\Controllers\RoleController::class, 'viewRole'])->name('roles.view');
+        Route::get('/role-add', [App\Http\Controllers\RoleController::class, 'addRole'])->name('roles.add');
+        Route::post('/role-store', [App\Http\Controllers\RoleController::class, 'storeRole'])->name('roles.store');
+        Route::get('/role-edit/{id}', [App\Http\Controllers\RoleController::class, 'editRole'])->name('roles.edit');
+        Route::post('/role-update/{id}', [App\Http\Controllers\RoleController::class, 'updateRole'])->name('roles.update');
+        Route::post('/role-delete', [App\Http\Controllers\RoleController::class, 'deleteRole'])->name('roles.delete');
     });
 
     // Route::prefix('employees')->group(function(){
