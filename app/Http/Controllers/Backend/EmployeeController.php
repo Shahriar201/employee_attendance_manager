@@ -28,7 +28,7 @@ class EmployeeController extends Controller
         $this->validate($request,[
             'role'          => 'required|exists:roles,name',
             'name'          => 'required',
-            'email'         => 'required|email|unique:users,email',
+            'email'         => 'required|email|unique:employees,email',
             'password'      => 'required|min:6',
         ]);
 
@@ -47,5 +47,24 @@ class EmployeeController extends Controller
         $roles = Role::all();
 
         return view('backend.empolyee.edit-employee', compact('editData', 'roles'));
+    }
+
+    public function updateEmployee(Request $request, $id){
+
+        $data = User::findOrFail($id);
+
+        $this->validate($request,[
+            'role'       => 'required|exists:roles,name',
+            'name'          => 'required',
+            'email'         => 'required|email|unique:employees,email,'.$data->id,
+        ]);
+
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->save();
+        $data->syncRoles($request->role);
+
+        return redirect()->route('employees.view')->with('success', 'Data updated successfully');
+
     }
 }
