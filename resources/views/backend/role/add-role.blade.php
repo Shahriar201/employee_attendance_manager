@@ -67,7 +67,6 @@
 
                                 <div class="form-group col-md-6">
                                     <label for="permission">Permissions</label>
-                                    {{-- <input type="text" name="permission" class="form-control form-control-sm" value=""> --}}
                                     <select name="permission[]" id="permission" class="form-control select2" multiple>
                                         <option value="">Select Permissions</option>
                                         @foreach ($permissions as $permission)
@@ -114,6 +113,7 @@
 <script>
         $( document ).ready(function() {
             var tem = [<?php echo isset($temp) ? $temp : '' ?>];
+            console.log('================================================')
             $('#permission').val(tem).trigger('change');
     });
 
@@ -152,7 +152,6 @@
         }
       });
 
-    //   console.log('{{ @$editData->id }}');
     });
 
     </script>
