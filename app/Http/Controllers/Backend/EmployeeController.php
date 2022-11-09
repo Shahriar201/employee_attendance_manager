@@ -44,6 +44,7 @@ class EmployeeController extends Controller
             $employee = new User();
             $employee->name = $request->name;
             $employee->email = $request->email;
+            $employee->status = $request->status;
             $employee->password = bcrypt($request->password);
             $employee->created_by = auth()->user()->id;
             $employee->save();
@@ -66,12 +67,12 @@ class EmployeeController extends Controller
 
             DB::commit();
 
-            return redirect()->route('employees.view')->with('success', 'Data inserted successfully');
+            return redirect()->route('employees.view')->with('success', 'Data updated successfully');
 
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return redirect()->back()->with('error', 'Data inserted fail');
+            return redirect()->back()->with('error', 'Data updated fail');
         }
 
 
@@ -79,27 +80,64 @@ class EmployeeController extends Controller
 
     public function editEmployee($id){
         $editData = User::find($id);
+        $employeeDetails = EmployeeDetails::where('employee_id', $editData->id)->first();
         $roles = Role::all();
 
-        return view('backend.empolyee.edit-employee', compact('editData', 'roles'));
+        return view('backend.empolyee.edit-employee', compact('editData', 'roles', 'employeeDetails'));
     }
 
     public function updateEmployee(Request $request, $id){
+        // dd($request->all());
 
-        $data = User::findOrFail($id);
+        $employee = User::findOrFail($id);
+
+        $employeeDetails = EmployeeDetails::where('employee_id', $employee->id)->first();
+        // dd($employeeDetails->image);
 
         $this->validate($request,[
             'role'       => 'required|exists:roles,name',
             'name'          => 'required',
-            'email'         => 'required|email|unique:employees,email,'.$data->id,
+            'email'         => 'required|email|unique:employees,email,'.$employee->id,
+            'address'       => 'required',
+            'mobile'        => 'required',
+            'status'        => 'required'
         ]);
 
-        $data->name = $request->name;
-        $data->email = $request->email;
-        $data->save();
-        $data->syncRoles($request->role);
+        DB::beginTransaction();
 
-        return redirect()->route('employees.view')->with('success', 'Data updated successfully');
+        try {
+
+            $employee->name = $request->name;
+            $employee->email = $request->email;
+            $employee->status = $request->status;
+            $employee->updated_by = auth()->user()->id;
+            $employee->save();
+            $employee->syncRoles($request->role);
+
+            $employeeDetails->address = $request->address;
+            $employeeDetails->mobile = $request->mobile;
+            $employeeDetails->updated_by = auth()->user()->id;
+
+            if($request->file('image')) {
+                $file = $request->file('image');
+                @unlink(public_path('upload/employee_images/'.$employeeDetails->image));
+                $fileName = date('YmdHi').$file->getClientOriginalName();
+                $file->move(public_path('upload/employee_images'), $fileName);
+                $employeeDetails['image'] = $fileName;
+            }
+
+            $employeeDetails->save();
+
+            DB::commit();
+
+            return redirect()->route('employees.view')->with('success', 'Data updated successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
+
+            return redirect()->back()->with('error', 'Data updated fail');
+        }
 
     }
 

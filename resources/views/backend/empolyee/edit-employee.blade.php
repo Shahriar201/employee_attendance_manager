@@ -46,7 +46,7 @@
                         <div class="card-body">
 
                         {{-- User add form --}}
-                        <form method="post" action="{{ route('employees.update', $editData->id) }}" id="myForm">
+                        <form method="post" action="{{ route('employees.update', $editData->id) }}" id="myForm" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-row">
@@ -76,6 +76,49 @@
                                     </font>
                                 </div>
 
+                                <div class="form-group col-md-4">
+                                    <label for="address">Address</label>
+                                    <input type="address" name="address" value="{{ $employeeDetails->address }}" class="form-control">
+                                    <font style="color:red">
+                                        {{($errors->has('address'))?($errors->first('address')):''}}
+                                    </font>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="status">Status</label>
+                                    <select name="status" class="form-control col-md-12">
+                                        <option value="">Select Status</option>
+                                        <option value="1" {{ $editData->status == 1 ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ $editData->status == 0 ? 'selected' : '' }}>Inactive</option>
+                                    </select>
+                                    <font style="color:red">
+                                        {{($errors->has('status'))?($errors->first('status')):''}}
+                                    </font>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="mobile">Mobile No.</label>
+                                    <input type="mobile" name="mobile" class="form-control" value="{{ $employeeDetails->mobile }}">
+                                    <font style="color:red">
+                                        {{($errors->has('mobile'))?($errors->first('mobile')):''}}
+                                    </font>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="image">Image</label>
+                                    <input type="file" name="image" class="form-control" id="image">
+                                    <font style="color:red">
+                                      {{($errors->has('image'))?($errors->first('image')):''}}
+                                  </font>
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <img id="showImage" src="{{ (!empty($employeeDetails->image))?url('public/upload/employee_images/'.$employeeDetails->image):url('upload/no_image.jpg') }}"
+                                     style="width: 150px; height: 160px; border: 1px solid #000;">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <input type="submit" value="Update" class="btn btn-primary">
                                 </div>
