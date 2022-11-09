@@ -46,12 +46,12 @@
                         <div class="card-body">
 
                         {{-- User add form --}}
-                        <form method="post" action="{{ route('employees.store') }}" id="myForm">
+                        <form method="post" action="{{ route('employees.store') }}" id="myForm" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="user_type">User Role</label>
+                                    <label for="role">User Role</label>
                                     <select name="role" id="role" class="form-control">
                                         <option value="">Select Role</option>
                                         @foreach ($roles as $role)
@@ -77,6 +77,34 @@
                                 </div>
 
                                 <div class="form-group col-md-4">
+                                    <label for="address">Address</label>
+                                    <input type="address" name="address" class="form-control">
+                                    <font style="color:red">
+                                        {{($errors->has('address'))?($errors->first('address')):''}}
+                                    </font>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="mobile">Mobile No.</label>
+                                    <input type="mobile" name="mobile" class="form-control">
+                                    <font style="color:red">
+                                        {{($errors->has('mobile'))?($errors->first('mobile')):''}}
+                                    </font>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="status">Status</label>
+                                    <select name="status" class="form-control col-md-12">
+                                        <option value="">Select Status</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                    <font style="color:red">
+                                        {{($errors->has('status'))?($errors->first('status')):''}}
+                                    </font>
+                                </div>
+
+                                <div class="form-group col-md-4">
                                     <label for="password">Password</label>
                                     <input type="password" name="password" id="password" class="form-control">
                                 </div>
@@ -86,11 +114,25 @@
                                     <input type="password" name="password2" class="form-control">
                                 </div>
 
+                                <div class="form-group col-md-4">
+                                    <label for="image">Image</label>
+                                    <input type="file" name="image" class="form-control" id="image">
+                                    <font style="color:red">
+                                      {{($errors->has('image'))?($errors->first('image')):''}}
+                                  </font>
+                                </div>
+
+                               <div class="form-group col-md-2">
+                                    <img id="showImage" src=""
+                                     style="width: 150px; height: 160px; border: 1px solid #000;">
+                                </div>
+
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <input type="submit" value="submit" class="btn btn-primary">
                                 </div>
                             </div>
-
 
                           </form>
 
@@ -120,13 +162,29 @@
           name: {
             required: true,
           },
-          user_type: {
+          role: {
             required: true,
           },
           email: {
             required: true,
             email: true,
           },
+          address: {
+            required: true,
+            address: true,
+          },
+          mobile: {
+            required: true,
+            mobile: true,
+          },
+          status: {
+            required: true,
+            status: true,
+          },
+        //   image: {
+        //     required: true,
+        //     image: true,
+        //   },
           password: {
             required: true,
             minlength: 6
@@ -140,13 +198,25 @@
           name: {
             required: "Please enter username"
           },
-          user_type: {
-            required: "Please select user type"
+          role: {
+            required: "Please select user role"
           },
           email: {
             required: "Please enter a email address",
             email: "Please enter a <em>vaild</em> email address"
           },
+          address: {
+            required: "Please enter an address",
+          },
+          mobile: {
+            required: "Please enter valid mobile number",
+          },
+          status: {
+            required: "Please select an status",
+          },
+        //   image: {
+        //     required: "Please select an image",
+        //   },
           password: {
             required: "Please enter a password",
             minlength: "Your password must be at least 6 characters or numbers"

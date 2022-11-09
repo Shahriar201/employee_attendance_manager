@@ -54,6 +54,14 @@ Route::group(['middleware'=>'auth'], function() {
         Route::get('/edit/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'editEmployee'])->name('employees.edit');
         Route::post('/update/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'updateEmployee'])->name('employees.update');
         Route::post('/delete', [App\Http\Controllers\Backend\EmployeeController::class, 'deleteEmployee'])->name('employees.delete');
+
+        // Employee details routes
+        Route::get('/details-view', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'viewEmployeeDetails'])->name('employees.details.view');
+        Route::get('/details-add', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'addEmployeeDetails'])->name('employees.details.add');
+        Route::post('/details-store', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'storeEmployeDetailse'])->name('employees.details.store');
+        Route::get('/details-edit/{id}', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'editEmployeeDetails'])->name('employees.details.edit');
+        Route::post('/details-update/{id}', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'updateEmployeeDetails'])->name('employees.details.update');
+        Route::post('/details-delete', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'deleteEmployeeDetails'])->name('employees.details.delete');
     });
 });
 
