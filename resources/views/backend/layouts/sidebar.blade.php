@@ -83,14 +83,22 @@
 
             </ul>
           </li>
-          {{-- <li class="nav-item">
-            <a href="{{ route('employees.view') }}" class="nav-link">
+          <li class="nav-item">
+            <a href="{{ route('employees.attendance.add') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Employee
+                Employee Attendance
               </p>
             </a>
-          </li> --}}
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('employees.attendance.list') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Employee Attendance List
+              </p>
+            </a>
+          </li>
           {{-- <li class="nav-item has-treeview {{ ($prefix=='/employees')?'menu-open':'' }}">
             <a href="" class="nav-link">
                 <i class="nav-icon fa fa-user"></i>

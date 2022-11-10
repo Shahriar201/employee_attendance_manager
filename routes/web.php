@@ -60,6 +60,10 @@ Route::group(['middleware'=>'auth'], function() {
 
         // Employee details routes
         Route::get('/contacts-view', [App\Http\Controllers\Backend\EmployeeContactController::class, 'viewEmployeeContacts'])->name('employees.contacts.view');
+
+        // Employee attendance routes
+        Route::get('/attendance', [App\Http\Controllers\Backend\EmployeeAttendanceController::class, 'employeeAttendanceAdd'])->name('employees.attendance.add');
+        Route::get('/attendance-list', [App\Http\Controllers\Backend\EmployeeAttendanceController::class, 'employeeAttendanceList'])->name('employees.attendance.list');
     });
 });
 
