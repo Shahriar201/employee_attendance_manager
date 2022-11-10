@@ -64,13 +64,20 @@
                                         // $diff = $eheckin->diffInDays ($eheckout);
                                         // print( $totalWokringHours);
 
-                                        $to = Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $attendanceReport->created_at);
+                                        // $to = Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $attendanceReport->created_at);
 
-                                        $from = Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $attendanceReport->updated_at);
+                                        // $from = Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $attendanceReport->updated_at);
 
+                                        // $totalDuration = $to->DiffInSeconds($from);
+                                        // $diff_in_hours = Carbon\CarbonInterval::seconds($totalDuration)->cascade()->forHumans();
 
+                                        // $diff_in_hours = $to->diffInHours($from);
 
-                                        $diff_in_hours = $to->diffInHours($from);
+                                        // check
+                                        $actual_start_at = Carbon\Carbon::parse($attendanceReport->created_at);
+                                        $actual_end_at   = Carbon\Carbon::parse($attendanceReport->updated_at);
+                                        $mins            = $actual_end_at->diffInMinutes($actual_start_at, true);
+                                        $diff_in_hours = ($mins/60)
                                     ?>
 
                                         <tr class="{{ $attendanceReport->id }}">
@@ -80,7 +87,7 @@
                                             {{-- <td>{{ date('H:i:s', strtotime($attendanceReport->created_at)) }}</td> --}}
                                             <td>{{ Carbon\Carbon::parse($attendanceReport->created_at)->format('g:i A') }}</td>
                                             <td>{{ Carbon\Carbon::parse($attendanceReport->updated_at)->format('g:i A') }}</td>
-                                            <td>{{ $diff_in_hours }}</td>
+                                            <td>{{ round($diff_in_hours, 2) }}h</td>
 
                                         </tr>
 
