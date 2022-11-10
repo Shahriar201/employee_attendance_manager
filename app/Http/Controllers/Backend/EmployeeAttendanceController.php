@@ -44,4 +44,13 @@ class EmployeeAttendanceController extends Controller
             return redirect()->back()->with('success', 'Attendance check in successfully!');
         }
     }
+
+    public function employeeAttendanceList() {
+        $employeeAttendances = DB::table('employee_attendances')
+            ->leftJoin('employees', 'employee_attendances.employee_id', 'employees.id')
+            ->select('employee_attendances.*', 'employees.name')
+            ->get();
+
+        return view('backend.empolyee-attendance.view-employee-attendance', compact('employeeAttendances'));
+    }
 }
