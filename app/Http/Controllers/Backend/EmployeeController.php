@@ -105,6 +105,7 @@ class EmployeeController extends Controller
         $employee = User::findOrFail($id);
 
         $employeeDetails = EmployeeDetails::where('employee_id', $employee->id)->first();
+        $employeeContact = EmployeeContact::where('employee_id', $employee->id)->first();
 
         $this->validate($request,[
             'role'       => 'required|exists:roles,name',
@@ -112,13 +113,15 @@ class EmployeeController extends Controller
             'email'         => 'required|email|unique:employees,email,'.$employee->id,
             'address'       => 'required',
             'mobile'        => 'required',
-            'status'        => 'required'
+            'status'        => 'required',
+            'contact_name'  => 'required',
+            'contact_email' => 'required'
         ]);
 
         DB::beginTransaction();
 
         try {
-
+            // Update Employee
             $employee->name = $request->name;
             $employee->email = $request->email;
             $employee->status = $request->status;
@@ -126,6 +129,7 @@ class EmployeeController extends Controller
             $employee->save();
             $employee->syncRoles($request->role);
 
+            // Update Employee Details
             $employeeDetails->address = $request->address;
             $employeeDetails->mobile = $request->mobile;
             $employeeDetails->updated_by = auth()->user()->id;
@@ -139,6 +143,13 @@ class EmployeeController extends Controller
             }
 
             $employeeDetails->save();
+
+            // Update Employee Contact
+            $employeeContact->contact_name = $request->contact_name;
+            $employeeContact->contact_email = $request->contact_email;
+            $employeeContact->updated_by = auth()->user()->id;
+            $employeeContact->save();
+
 
             DB::commit();
 
@@ -160,12 +171,14 @@ class EmployeeController extends Controller
         try {
             $employee = User::find($request->id);
             $employeeDetails = EmployeeDetails::where('employee_id', $employee->id)->first();
+            $employeeContact = EmployeeContact::where('employee_id', $employee->id)->first();
 
             if(file_exists('public/upload/employee_images/' . $employeeDetails->image) AND ! empty($employeeDetails->image)){
                 unlink('public/upload/employee_images/' . $employeeDetails->image);
             }
 
             $employeeDetails->delete();
+            $employeeContact->delete();
             $employee->delete();
 
             $employee->syncRoles([]);
