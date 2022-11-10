@@ -39,14 +39,16 @@
                         <!-- /.card-header -->
                         <div class="card-body">
 
-                            <form method="post" action="#" id="myForm" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('employees.attendance.store') }}" id="myForm" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-row">
 
+                                    <input type="hidden" name="id" value="{{ auth()->user()->id }}">
+
                                     <div class="form-group col-md-4">
                                         <label for="date">Date</label>
-                                        <input type="date" name="date" class="form-control">
+                                        <input type="text" name="date" id="currentDate" class="form-control currentDate" value="" readonly="true" ">
 
                                         <font style="color:red">
                                           {{($errors->has('name')) ? ($errors->first('name')) : ''}}
@@ -79,5 +81,12 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<script>
+    var date = new Date();
+	var currentDate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+
+    document.getElementById('currentDate').value = currentDate;
+</script>
 
 @endsection
