@@ -87,12 +87,10 @@ class EmployeeController extends Controller
     }
 
     public function updateEmployee(Request $request, $id){
-        // dd($request->all());
 
         $employee = User::findOrFail($id);
 
         $employeeDetails = EmployeeDetails::where('employee_id', $employee->id)->first();
-        // dd($employeeDetails->image);
 
         $this->validate($request,[
             'role'       => 'required|exists:roles,name',
@@ -143,11 +141,29 @@ class EmployeeController extends Controller
 
     public function deleteEmployee(Request $request){
 
-        $employee = User::find($request->id);
-        $employee->delete();
+        DB::beginTransaction();
 
-        $employee->syncRoles([]);
+        try {
+            $employee = User::find($request->id);
+            $employeeDetails = EmployeeDetails::where('employee_id', $employee->id)->first();
 
-        return redirect()->back()->with('success', 'Data deleted successfully');
+            if(file_exists('public/upload/employee_images/' . $employeeDetails->image) AND ! empty($employeeDetails->image)){
+                unlink('public/upload/employee_images/' . $employeeDetails->image);
+            }
+
+            $employeeDetails->delete();
+            $employee->delete();
+
+            $employee->syncRoles([]);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Data deleted successfully');
+
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+
+            return redirect()->back()->with('error', 'Data updated fail');
+        }
     }
 }
