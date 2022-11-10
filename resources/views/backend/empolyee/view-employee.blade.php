@@ -9,13 +9,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Manage User</h1>
+                    <h1 class="m-0">Manage Employee</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">User</li>
+                        <li class="breadcrumb-item active">Employee</li>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -37,9 +37,9 @@
                     <!-- Custom tabs (Charts with tabs)-->
                     <div class="card">
                         <div class="card-header">
-                            <h3>User List
+                            <h3>Employee List
                                 <a class="btn btn-success float-right btn-sm" href="{{ route('employees.add') }}">
-                                    <i class="fa fa-plus-circle"></i>Add User</a>
+                                    <i class="fa fa-plus-circle"></i>Add Employee</a>
                             </h3>
                         </div>
                         <!-- /.card-header -->
@@ -52,6 +52,7 @@
                                         <th>Role</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -69,6 +70,13 @@
                                             </td>
                                             <td>{{ $employee->name }}</td>
                                             <td>{{ $employee->email }}</td>
+                                            <td>
+                                                @if ($employee->status == 1)
+                                                    <span class="badge badge-success">Active</span>
+                                                @else
+                                                    <span class="badge badge-danger">Inactive</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <a title="Edit" id="edit" class="btn btn-sm btn-primary" href="{{ route('employees.edit', $employee->id)}}">
                                                     <i class="fa fa-edit">
