@@ -47,7 +47,7 @@
                                         <th>Address</th>
                                         <th>Status</th>
                                         <th>Image</th>
-                                        <th>Action</th>
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,9 +65,9 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <img src="{{ (!empty($employeeDetail->image)) ? url('public/upload/employee_images/'.$employeeDetail->image): '' }}" width="100px" height="120px" alt="No Image Found">
+                                                <img src="{{ (!empty($employeeDetail->image)) ? url('public/upload/employee_images/'.$employeeDetail->image): '' }}" width="90px" height="100px" alt="No Image Found">
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <a title="Edit" id="edit" class="btn btn-sm btn-primary" href="{{ route('employees.details.edit', $employeeDetail->id)}}">
                                                     <i class="fa fa-edit">
 
@@ -76,7 +76,7 @@
                                                 <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route('employees.details.delete') }}" data-token="{{ csrf_token() }}" data-id="{{ $employeeDetail->id }}">
                                                     <i class="fa fa-trash"> </i>
                                                 </a>
-                                            </td>
+                                            </td> --}}
                                         </tr>
 
                                     @endforeach
