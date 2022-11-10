@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Backend\EmployeeContacts;
+use App\Models\Backend\EmployeeContact;
 use App\Models\EmployeeDetails;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -71,7 +71,7 @@ class EmployeeController extends Controller
             $employeeDetails->save();
 
             // Store Employee Contact
-            $employeeContact = new EmployeeContacts();
+            $employeeContact = new EmployeeContact();
             $employeeContact->employee_id = $employee->id;
             $employeeContact->contact_name = $request->contact_name;
             $employeeContact->contact_email = $request->contact_email;
@@ -94,9 +94,10 @@ class EmployeeController extends Controller
     public function editEmployee($id){
         $editData = User::find($id);
         $employeeDetails = EmployeeDetails::where('employee_id', $editData->id)->first();
+        $employeeContact = EmployeeContact::where('employee_id', $editData->id)->first();
         $roles = Role::all();
 
-        return view('backend.empolyee.edit-employee', compact('editData', 'roles', 'employeeDetails'));
+        return view('backend.empolyee.edit-employee', compact('editData', 'roles', 'employeeDetails', 'employeeContact'));
     }
 
     public function updateEmployee(Request $request, $id){

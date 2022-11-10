@@ -105,6 +105,22 @@
                                 </div>
 
                                 <div class="form-group col-md-4">
+                                    <label for="contact_name">Contact Name</label>
+                                    <input type="contact_name" name="contact_name" class="form-control" value="{{ $employeeContact->contact_name }}">
+                                    <font style="color:red">
+                                        {{($errors->has('contact_name'))?($errors->first('contact_name')):''}}
+                                    </font>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="contact_email">Contact Email</label>
+                                    <input type="contact_email" name="contact_email" class="form-control" value="{{ $employeeContact->contact_email }}">
+                                    <font style="color:red">
+                                        {{($errors->has('contact_email'))?($errors->first('contact_email')):''}}
+                                    </font>
+                                </div>
+
+                                <div class="form-group col-md-4">
                                     <label for="image">Image</label>
                                     <input type="file" name="image" class="form-control" id="image">
                                     <font style="color:red">
