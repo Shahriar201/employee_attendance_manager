@@ -47,10 +47,22 @@ class EmployeeAttendanceController extends Controller
 
     public function employeeAttendanceList() {
         $employeeAttendances = DB::table('employee_attendances')
-            ->leftJoin('employees', 'employee_attendances.employee_id', 'employees.id')
-            ->select('employee_attendances.*', 'employees.name')
-            ->get();
+                            ->leftJoin('employees', 'employee_attendances.employee_id', 'employees.id')
+                            ->select('employee_attendances.*', 'employees.name')
+                            ->where('employee_id', auth()->user()->id)
+                            ->get();
 
         return view('backend.empolyee-attendance.view-employee-attendance', compact('employeeAttendances'));
+    }
+
+    public function employeeAttendanceReport() {
+        $attendanceReports = DB::table('employee_attendances')
+                            ->leftJoin('employees', 'employee_attendances.employee_id', 'employees.id')
+                            ->select('employee_attendances.*', 'employees.name')
+                            ->where('employee_id', auth()->user()->id)
+                            // ->whereDate('employee_attendances.created_at', 'employee_attendances.updated_at')
+                            ->get();
+
+        return view('backend.empolyee-attendance.view-employee-attendance-report', compact('attendanceReports'));
     }
 }

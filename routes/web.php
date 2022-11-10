@@ -65,6 +65,9 @@ Route::group(['middleware'=>'auth'], function() {
         Route::get('/attendance', [App\Http\Controllers\Backend\EmployeeAttendanceController::class, 'employeeAttendanceAdd'])->name('employees.attendance.add');
         Route::post('/attendance-store', [App\Http\Controllers\Backend\EmployeeAttendanceController::class, 'employeeAttendanceStore'])->name('employees.attendance.store');
         Route::get('/attendance-list', [App\Http\Controllers\Backend\EmployeeAttendanceController::class, 'employeeAttendanceList'])->name('employees.attendance.list');
+
+        // Employee attendance reports for login user
+        Route::get('/attendance-reports', [App\Http\Controllers\Backend\EmployeeAttendanceController::class, 'employeeAttendanceReport'])->name('employees.attendance.report');
     });
 });
 

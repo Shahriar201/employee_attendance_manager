@@ -87,7 +87,7 @@
             <a href="{{ route('employees.attendance.add') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Employee Attendance
+                Attendance
               </p>
             </a>
           </li>
@@ -95,28 +95,18 @@
             <a href="{{ route('employees.attendance.list') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Employee Attendance List
+                Attendance List
               </p>
             </a>
           </li>
-          {{-- <li class="nav-item has-treeview {{ ($prefix=='/employees')?'menu-open':'' }}">
-            <a href="" class="nav-link">
-                <i class="nav-icon fa fa-user"></i>
-                <p>
-                    Manage User
-                    <i class="fas fa-angle-left right"></i>
-                </p>
+          <li class="nav-item">
+            <a href="{{ route('employees.attendance.report') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Attendance Report
+              </p>
             </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{ route('users.view') }}" class="nav-link {{ ($route=='users.view')?'active':'' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>View User</p>
-                    </a>
-                </li>
-
-            </ul>
-        </li> --}}
+          </li>
         </ul>
       </nav>
     </div>
