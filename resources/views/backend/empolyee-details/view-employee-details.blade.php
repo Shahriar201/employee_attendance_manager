@@ -55,11 +55,18 @@
 
                                         <tr class="{{ $employeeDetail->id }}">
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ $employeeDetail->employee->name ?? '' }}</td>
                                             <td>{{ $employeeDetail->name ?? '' }}</td>
-                                            <td>{{ $employeeDetail->Address ?? '' }}</td>
-                                            <td>{{ $employeeDetail->employee->status }}</td>
-                                            <td>{{ $employeeDetail->image ?? '' }}</td>
+                                            <td>{{ $employeeDetail->address ?? '' }}</td>
+                                            <td>
+                                                @if ($employeeDetail->status == 1)
+                                                    <span class="badge badge-success">Active</span>
+                                                @else
+                                                    <span class="badge badge-danger">Inactive</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <img src="{{ (!empty($employeeDetail->image)) ? url('public/upload/employee_images/'.$employeeDetail->image): '' }}" width="100px" height="120px" alt="No Image Found">
+                                            </td>
                                             <td>
                                                 <a title="Edit" id="edit" class="btn btn-sm btn-primary" href="{{ route('employees.details.edit', $employeeDetail->id)}}">
                                                     <i class="fa fa-edit">
