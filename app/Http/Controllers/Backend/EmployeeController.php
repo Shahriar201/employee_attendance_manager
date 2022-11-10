@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\EmployeeContacts;
 use App\Models\EmployeeDetails;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class EmployeeController extends Controller
         return view('backend.empolyee.add-employee', $data);
     }
 
-    public function storeEmployee(Request $request){
+    public function storeEmployee(Request $request) {
 
         // data validation
         $this->validate($request,[
@@ -34,6 +35,8 @@ class EmployeeController extends Controller
             'address'       => 'required',
             'mobile'        => 'required',
             'status'        => 'required',
+            'contact_name'  => 'required',
+            'contact_email' => 'required',
             'password'      => 'required|min:6',
             // 'image'         => 'required',
         ]);
@@ -41,6 +44,7 @@ class EmployeeController extends Controller
         DB::beginTransaction();
 
         try {
+            // Store Employee
             $employee = new User();
             $employee->name = $request->name;
             $employee->email = $request->email;
@@ -50,6 +54,7 @@ class EmployeeController extends Controller
             $employee->save();
             $employee->assignRole($request->role);
 
+            // Store Employee Details
             $employeeDetails = new EmployeeDetails();
             $employeeDetails->employee_id = $employee->id;
             $employeeDetails->address = $request->address;
@@ -65,9 +70,17 @@ class EmployeeController extends Controller
 
             $employeeDetails->save();
 
+            // Store Employee Contact
+            $employeeContact = new EmployeeContacts();
+            $employeeContact->employee_id = $employee->id;
+            $employeeContact->contact_name = $request->contact_name;
+            $employeeContact->contact_email = $request->contact_email;
+            $employeeContact->created_by = auth()->user()->id;
+            $employeeContact->save();
+
             DB::commit();
 
-            return redirect()->route('employees.view')->with('success', 'Data updated successfully');
+            return redirect()->route('employees.view')->with('success', 'Data store successfully');
 
         } catch (\Throwable $th) {
             DB::rollBack();
