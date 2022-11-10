@@ -57,11 +57,9 @@ Route::group(['middleware'=>'auth'], function() {
 
         // Employee details routes
         Route::get('/details-view', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'viewEmployeeDetails'])->name('employees.details.view');
-        Route::get('/details-add', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'addEmployeeDetails'])->name('employees.details.add');
-        Route::post('/details-store', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'storeEmployeDetailse'])->name('employees.details.store');
-        Route::get('/details-edit/{id}', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'editEmployeeDetails'])->name('employees.details.edit');
-        Route::post('/details-update/{id}', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'updateEmployeeDetails'])->name('employees.details.update');
-        Route::post('/details-delete', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'deleteEmployeeDetails'])->name('employees.details.delete');
+
+        // Employee details routes
+        Route::get('/contacts-view', [App\Http\Controllers\Backend\EmployeeContactController::class, 'viewEmployeeContacts'])->name('employees.contacts.view');
     });
 });
 

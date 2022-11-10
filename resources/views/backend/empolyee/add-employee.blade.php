@@ -93,6 +93,22 @@
                                 </div>
 
                                 <div class="form-group col-md-4">
+                                    <label for="contact_name">Contact Name</label>
+                                    <input type="contact_name" name="contact_name" class="form-control">
+                                    <font style="color:red">
+                                        {{($errors->has('contact_name'))?($errors->first('contact_name')):''}}
+                                    </font>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="contact_email">Contact Email</label>
+                                    <input type="contact_email" name="contact_email" class="form-control">
+                                    <font style="color:red">
+                                        {{($errors->has('contact_email'))?($errors->first('contact_email')):''}}
+                                    </font>
+                                </div>
+
+                                <div class="form-group col-md-4">
                                     <label for="status">Status</label>
                                     <select name="status" class="form-control col-md-12">
                                         <option value="">Select Status</option>
@@ -177,6 +193,14 @@
             required: true,
             mobile: true,
           },
+          conatact_name: {
+            required: true,
+            conatact_name: true,
+          },
+          contact_email: {
+            required: true,
+            contact_email: true,
+          },
           status: {
             required: true,
             status: true,
@@ -214,9 +238,12 @@
           status: {
             required: "Please select an status",
           },
-        //   image: {
-        //     required: "Please select an image",
-        //   },
+          contact_name: {
+            required: "Please enter contact name",
+          },
+          contact_email: {
+            required: "Please enter contact email",
+          },
           password: {
             required: "Please enter a password",
             minlength: "Your password must be at least 6 characters or numbers"
