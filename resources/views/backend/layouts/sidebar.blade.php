@@ -26,75 +26,90 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview {{ ($prefix=='/manages')?'menu-open':'' }}">
-            <a href="" class="nav-link">
-                <i class="nav-icon fas fa-copy"></i>
-                <p>
-                    Access Control
-                    <i class="fas fa-angle-left right"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{ route('permissions.view') }}" class="nav-link {{ ($route=='permissions.view')?'active':'' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Permissions</p>
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('roles.view') }} " class="nav-link ">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>View Roles</p>
-                    </a>
-                </li>
+          @can('access control')
+            <li class="nav-item has-treeview {{ ($prefix=='/manages')?'menu-open':'' }}">
+                <a href="" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>
+                        Access Control
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    @can('view permission')
+                        <li class="nav-item">
+                            <a href="{{ route('permissions.view') }}" class="nav-link {{ ($route=='permissions.view')?'active':'' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Permissions</p>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('view role')
+                        <li class="nav-item">
+                            <a href="{{ route('roles.view') }} " class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>View Roles</p>
+                            </a>
+                        </li>
+                    @endcan
 
-            </ul>
-          </li>
 
-          <li class="nav-item has-treeview {{ ($prefix=='/employees')?'menu-open':'' }}">
-            <a href="" class="nav-link">
-                <i class="nav-icon fas fa-copy"></i>
-                <p>
-                    Employee
-                    <i class="fas fa-angle-left right"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{ route('employees.view') }}" class="nav-link {{ ($route=='employees.view')?'active':'' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Employee</p>
-                    </a>
-                </li>
+                </ul>
+            </li>
+          @endcan
 
-                <li class="nav-item">
-                    <a href="{{ route('employees.details.view') }} " class="nav-link ">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Employee Details</p>
+          @can('view role')
+            <li class="nav-item has-treeview {{ ($prefix=='/employees')?'menu-open':'' }}">
+                @can('view role')
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Employee
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('employees.contacts.view') }} " class="nav-link ">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Employee Contact</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('all.employees.attendance.list') }} " class="nav-link ">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Attendance List</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('all.employees.attendance.report') }} " class="nav-link ">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Employee Reports</p>
-                    </a>
-                </li>
+                @endcan
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('employees.view') }}" class="nav-link {{ ($route=='employees.view')?'active':'' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Employee</p>
+                        </a>
+                    </li>
 
-            </ul>
-          </li>
+                    @can('employee details')
+                        <li class="nav-item">
+                            <a href="{{ route('employees.details.view') }} " class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Employee Details</p>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('employee contact')
+                        <li class="nav-item">
+                            <a href="{{ route('employees.contacts.view') }} " class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Employee Contact</p>
+                            </a>
+                        </li>
+                    @endcan
+                    <li class="nav-item">
+                        <a href="{{ route('all.employees.attendance.list') }} " class="nav-link ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Attendance List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('all.employees.attendance.report') }} " class="nav-link ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Employee Reports</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+          @endcan
           <li class="nav-item">
             <a href="{{ route('employees.attendance.add') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>

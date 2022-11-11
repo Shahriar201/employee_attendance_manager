@@ -31,29 +31,29 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::prefix('manages')->group(function() {
         // Permission routes
-        Route::get('/permission-view', [App\Http\Controllers\PermissionController::class, 'viewPermission'])->name('permissions.view');
-        Route::get('/permission-add', [App\Http\Controllers\PermissionController::class, 'addPermission'])->name('permissions.add');
-        Route::post('/permission-store', [App\Http\Controllers\PermissionController::class, 'storePermission'])->name('permissions.store');
-        Route::get('/permission-edit/{id}', [App\Http\Controllers\PermissionController::class, 'editPermission'])->name('permissions.edit');
-        Route::post('/permission-update/{id}', [App\Http\Controllers\PermissionController::class, 'updatePermission'])->name('permissions.update');
-        Route::post('/permission-delete', [App\Http\Controllers\PermissionController::class, 'deletePermission'])->name('permissions.delete');
+        Route::get('/permission-view', [App\Http\Controllers\PermissionController::class, 'viewPermission'])->name('permissions.view')->middleware(['permission:view permission']);
+        Route::get('/permission-add', [App\Http\Controllers\PermissionController::class, 'addPermission'])->name('permissions.add')->middleware(['permission:add permission|view permission']);
+        Route::post('/permission-store', [App\Http\Controllers\PermissionController::class, 'storePermission'])->name('permissions.store')->middleware(['permission:add permission|view permission']);
+        Route::get('/permission-edit/{id}', [App\Http\Controllers\PermissionController::class, 'editPermission'])->name('permissions.edit')->middleware(['permission:add permission|view permission']);
+        Route::post('/permission-update/{id}', [App\Http\Controllers\PermissionController::class, 'updatePermission'])->name('permissions.update')->middleware(['permission:add permission|view permission']);
+        Route::post('/permission-delete', [App\Http\Controllers\PermissionController::class, 'deletePermission'])->name('permissions.delete')->middleware(['permission:delete permission|view permission']);
 
         // Role routes
-        Route::get('/role-view', [App\Http\Controllers\RoleController::class, 'viewRole'])->name('roles.view');
-        Route::get('/role-add', [App\Http\Controllers\RoleController::class, 'addRole'])->name('roles.add');
-        Route::post('/role-store', [App\Http\Controllers\RoleController::class, 'storeRole'])->name('roles.store');
-        Route::get('/role-edit/{id}', [App\Http\Controllers\RoleController::class, 'editRole'])->name('roles.edit');
-        Route::post('/role-update/{id}', [App\Http\Controllers\RoleController::class, 'updateRole'])->name('roles.update');
-        Route::post('/role-delete', [App\Http\Controllers\RoleController::class, 'deleteRole'])->name('roles.delete');
+        Route::get('/role-view', [App\Http\Controllers\RoleController::class, 'viewRole'])->name('roles.view')->middleware(['permission:view role|view permission']);
+        Route::get('/role-add', [App\Http\Controllers\RoleController::class, 'addRole'])->name('roles.add')->middleware(['permission:add role|add permission']);
+        Route::post('/role-store', [App\Http\Controllers\RoleController::class, 'storeRole'])->name('roles.store')->middleware(['permission:add role|add permission']);
+        Route::get('/role-edit/{id}', [App\Http\Controllers\RoleController::class, 'editRole'])->name('roles.edit')->middleware(['permission:add role|add permission']);
+        Route::post('/role-update/{id}', [App\Http\Controllers\RoleController::class, 'updateRole'])->name('roles.update')->middleware(['permission:add role|add permission']);
+        Route::post('/role-delete', [App\Http\Controllers\RoleController::class, 'deleteRole'])->name('roles.delete')->middleware(['permission:delete role|delete permission']);
     });
 
     Route::prefix('employees')->group(function() {
-        Route::get('/view', [App\Http\Controllers\Backend\EmployeeController::class, 'viewEmployee'])->name('employees.view');
-        Route::get('/add', [App\Http\Controllers\Backend\EmployeeController::class, 'addEmployee'])->name('employees.add');
-        Route::post('/store', [App\Http\Controllers\Backend\EmployeeController::class, 'storeEmployee'])->name('employees.store');
-        Route::get('/edit/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'editEmployee'])->name('employees.edit');
-        Route::post('/update/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'updateEmployee'])->name('employees.update');
-        Route::post('/delete', [App\Http\Controllers\Backend\EmployeeController::class, 'deleteEmployee'])->name('employees.delete');
+        Route::get('/view', [App\Http\Controllers\Backend\EmployeeController::class, 'viewEmployee'])->name('employees.view')->middleware(['permission:view role|view employee']);
+        Route::get('/add', [App\Http\Controllers\Backend\EmployeeController::class, 'addEmployee'])->name('employees.add')->middleware(['permission:add role|add employee']);
+        Route::post('/store', [App\Http\Controllers\Backend\EmployeeController::class, 'storeEmployee'])->name('employees.store')->middleware(['permission:add role|add employee']);
+        Route::get('/edit/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'editEmployee'])->name('employees.edit')->middleware(['permission:add role|add employee']);
+        Route::post('/update/{id}', [App\Http\Controllers\Backend\EmployeeController::class, 'updateEmployee'])->name('employees.update')->middleware(['permission:add role|add employee']);
+        Route::post('/delete', [App\Http\Controllers\Backend\EmployeeController::class, 'deleteEmployee'])->name('employees.delete')->middleware(['permission:delete role|delete employee']);
 
         // Employee details routes
         Route::get('/details-view', [App\Http\Controllers\Backend\EmployeeDetailsController::class, 'viewEmployeeDetails'])->name('employees.details.view');
