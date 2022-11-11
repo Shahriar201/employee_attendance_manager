@@ -80,6 +80,12 @@
                         <p>Employee Contact</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('all.employees.attendance.list') }} " class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Attendance List</p>
+                    </a>
+                </li>
 
             </ul>
           </li>

@@ -54,16 +54,6 @@
                                     @foreach ($attendanceReports as $key => $attendanceReport)
 
                                     <?php
-                                        // $eheckin = date('H:i:s', strtotime($attendanceReport->created_at));
-                                        // $eheckin =  Carbon\Carbon::parse($attendanceReport->created_at)->format('g:i:s')->toDateTimeString();
-                                        // $eheckout = date('H:i:s', strtotime($attendanceReport->updated_at));
-                                        // $eheckout = Carbon\Carbon::parse($attendanceReport->updated_at)->format('g:i:s')->toDateTimeString();
-
-                                        // $totalWokringHours = $eheckin->diffAsCarbonInterval($eheckout)->hours;
-                                        // $totalWokringHours = \Carbon\Carbon::createFromFormat($eheckin, $eheckout)
-                                        // $diff = $eheckin->diffInDays ($eheckout);
-                                        // print( $totalWokringHours);
-
                                         // $to = Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $attendanceReport->created_at);
 
                                         // $from = Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $attendanceReport->updated_at);
@@ -82,8 +72,8 @@
 
                                         <tr class="{{ $attendanceReport->id }}">
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ $attendanceReport->name }}</td>
                                             <td>{{ $attendanceReport->date }}</td>
+                                            <td>{{ $attendanceReport->name }}</td>
                                             {{-- <td>{{ date('H:i:s', strtotime($attendanceReport->created_at)) }}</td> --}}
                                             <td>{{ Carbon\Carbon::parse($attendanceReport->created_at)->format('g:i A') }}</td>
                                             <td>{{ Carbon\Carbon::parse($attendanceReport->updated_at)->format('g:i A') }}</td>

@@ -60,9 +60,35 @@ class EmployeeAttendanceController extends Controller
                             ->leftJoin('employees', 'employee_attendances.employee_id', 'employees.id')
                             ->select('employee_attendances.*', 'employees.name')
                             ->where('employee_id', auth()->user()->id)
-                            // ->whereDate('employee_attendances.created_at', 'employee_attendances.updated_at')
+                            ->orderBy('employee_attendances.id', 'desc')
                             ->get();
 
         return view('backend.empolyee-attendance.view-employee-attendance-report', compact('attendanceReports'));
+    }
+
+    public function allEmployeeAttendanceList () {
+        $allEmployeeAttendances = EmployeeAttendance::select('date')->groupBy('date')->orderBy('id', 'desc')->get();
+
+        // $allEmployeeAttendances = DB::table('employee_attendances')
+        //                     ->leftJoin('employees', 'employee_attendances.employee_id', 'employees.id')
+        //                     ->select('employee_attendances.*', 'employees.name', 'employee_attendances.date')
+        //                     ->groupBy('employee_attendances.date')
+        //                     ->orderBy('employee_attendances.id', 'desc')
+        //                     ->get();
+
+        return view('backend.empolyee-attendance.view-allEmployee-attendance', compact('allEmployeeAttendances'));
+    }
+
+    public function employeeAttendanceDetails ($date) {
+
+        $attendanceDetails = DB::table('employee_attendances')
+                            ->leftJoin('employees', 'employee_attendances.employee_id', 'employees.id')
+                            ->select('employee_attendances.*', 'employees.name')
+                            ->where('date', $date)
+                            ->get();
+
+        // $attendanceDetails = EmployeeAttendance::where('date', $date)->get();
+
+        return view('backend.empolyee-attendance.employee-attendance-details', compact('attendanceDetails'));
     }
 }

@@ -47,7 +47,7 @@ Route::group(['middleware'=>'auth'], function() {
         Route::post('/role-delete', [App\Http\Controllers\RoleController::class, 'deleteRole'])->name('roles.delete');
     });
 
-    Route::prefix('employees')->group(function(){
+    Route::prefix('employees')->group(function() {
         Route::get('/view', [App\Http\Controllers\Backend\EmployeeController::class, 'viewEmployee'])->name('employees.view');
         Route::get('/add', [App\Http\Controllers\Backend\EmployeeController::class, 'addEmployee'])->name('employees.add');
         Route::post('/store', [App\Http\Controllers\Backend\EmployeeController::class, 'storeEmployee'])->name('employees.store');
@@ -60,6 +60,10 @@ Route::group(['middleware'=>'auth'], function() {
 
         // Employee details routes
         Route::get('/contacts-view', [App\Http\Controllers\Backend\EmployeeContactController::class, 'viewEmployeeContacts'])->name('employees.contacts.view');
+
+        // All attendance routes
+        Route::get('/all-attendance-list', [App\Http\Controllers\Backend\EmployeeAttendanceController::class, 'allEmployeeAttendanceList'])->name('all.employees.attendance.list');
+        Route::get('/attendance-details/{date}', [App\Http\Controllers\Backend\EmployeeAttendanceController::class, 'employeeAttendanceDetails'])->name('all.employees.attendance.details');
 
         // Employee attendance routes
         Route::get('/attendance', [App\Http\Controllers\Backend\EmployeeAttendanceController::class, 'employeeAttendanceAdd'])->name('employees.attendance.add');
