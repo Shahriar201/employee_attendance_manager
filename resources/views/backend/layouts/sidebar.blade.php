@@ -86,6 +86,12 @@
                         <p>Attendance List</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('all.employees.attendance.report') }} " class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Employee Reports</p>
+                    </a>
+                </li>
 
             </ul>
           </li>

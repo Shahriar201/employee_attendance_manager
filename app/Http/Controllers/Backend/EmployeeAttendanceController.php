@@ -91,4 +91,14 @@ class EmployeeAttendanceController extends Controller
 
         return view('backend.empolyee-attendance.employee-attendance-details', compact('attendanceDetails'));
     }
+
+    public function allEmployeeAttendanceReport() {
+        $attendanceReports = DB::table('employee_attendances')
+                            ->leftJoin('employees', 'employee_attendances.employee_id', 'employees.id')
+                            ->select('employee_attendances.*', 'employees.name')
+                            ->orderBy('employee_attendances.id', 'desc')
+                            ->get();
+
+        return view('backend.empolyee-attendance.view-all-employee-attendance-report', compact('attendanceReports'));
+    }
 }
