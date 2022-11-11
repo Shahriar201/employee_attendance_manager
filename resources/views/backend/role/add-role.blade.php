@@ -106,19 +106,19 @@
 <!-- Page specific script -->
 {{-- @dd($editData->toArray()); --}}
 
+<script>
+    $(document).ready(function() {
+        var tem = [<?php echo isset($temp) ? $temp : '' ?>];
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', tem);
+        $('#permission').val(tem).trigger('change');
+    });
+</script>
+
 @endsection
 
 @push('script')
 
-<script>
-        $( document ).ready(function() {
-            var tem = [<?php echo isset($temp) ? $temp : '' ?>];
-            console.log('================================================')
-            $('#permission').val(tem).trigger('change');
-    });
 
-
-</script>
 
 <script>
     $(function () {
