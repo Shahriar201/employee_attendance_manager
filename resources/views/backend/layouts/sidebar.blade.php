@@ -110,6 +110,7 @@
                 </ul>
             </li>
           @endcan
+
           <li class="nav-item">
             <a href="{{ route('employees.attendance.add') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>

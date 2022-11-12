@@ -109,7 +109,6 @@
 <script>
     $(document).ready(function() {
         var tem = [<?php echo isset($temp) ? $temp : '' ?>];
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', tem);
         $('#permission').val(tem).trigger('change');
     });
 </script>
