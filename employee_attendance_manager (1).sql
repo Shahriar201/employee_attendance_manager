@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 11, 2022 at 05:42 PM
+-- Generation Time: Nov 13, 2022 at 03:44 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -82,7 +82,8 @@ CREATE TABLE `employee_attendances` (
 INSERT INTO `employee_attendances` (`id`, `employee_id`, `date`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (5, 21, '10-11-2022', NULL, NULL, '2022-11-10 17:43:10', '2022-11-10 17:44:21'),
 (6, 1, '11-11-2022', NULL, NULL, '2022-11-10 18:20:02', '2022-11-11 04:41:18'),
-(7, 22, '11-11-2022', NULL, NULL, '2022-11-11 04:59:07', '2022-11-11 04:59:07');
+(7, 22, '11-11-2022', NULL, NULL, '2022-11-11 04:59:07', '2022-11-11 04:59:07'),
+(8, 1, '12-11-2022', NULL, NULL, '2022-11-12 07:52:11', '2022-11-12 07:52:35');
 
 -- --------------------------------------------------------
 
@@ -435,7 +436,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT for table `employee_attendances`
 --
 ALTER TABLE `employee_attendances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `employee_contacts`
